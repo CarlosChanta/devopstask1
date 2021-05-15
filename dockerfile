@@ -1,4 +1,4 @@
-FROM python:2
+FROM python:3
 EXPOSE 4000
 WORKDIR /app
 COPY requirements.txt ./
