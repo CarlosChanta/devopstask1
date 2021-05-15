@@ -1,7 +1,2 @@
 .vscode/
 terraform/.terraform/*
-terraform/serviceaccount.json
-kubernetes-terminos.txt
-ApuntesKubectl.txt
-ApuntesMinikube.txt
-DevOpsTasks.code-workspace

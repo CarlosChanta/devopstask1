@@ -1,7 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 import socket
 
 app = Flask(__name__)
+
+@app.route("/")
+def homepage():
+    return render_template("home.html", title="HOME PAGE")
 
 @app.route('/greetings')
 def greetingsTask1():
