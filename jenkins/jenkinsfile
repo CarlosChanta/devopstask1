@@ -1,21 +1,20 @@
 pipeline {
- 
- agent{
-  node {
+  agent{
+    node {
       label 'master'
     }
- }
+  }
  
- stages {
+  stages {
  
-	stage('Initialize'){
-	   steps{
-		script{
-			def dockerHome = tool 'myDocker'
-			env.PATH = "${dockerHome}/bin:${env.PATH}"
-		}
+	  stage('Initialize'){
+	    steps{
+		    script{
+			  def dockerHome = tool 'myDocker'
+			  env.PATH = "${dockerHome}/bin:${env.PATH}"
+		  }
+	    }
 	  }
-	}
 	  
     stage('build') {
 	  agent { docker { image 'python:3' } }
@@ -25,7 +24,7 @@ pipeline {
     }
 	
     stage('test') {
-	agent { docker { image 'python:3' } }
+	    agent { docker { image 'python:3' } }
       steps {
         sh 'python ${WORKSPACE}/src/test.py'
       }
@@ -33,14 +32,14 @@ pipeline {
 	
     stage('Docker Image') {
       steps{
-	      sh 'docker build -t personal-python-test .'
+	      sh 'docker build -t tecamia-devops-image:v1.0 .'
 		  }
-        }
+    }
 		
     stage('Run Image / Container Creation') {
-        steps{
-		sh 'docker run -p 5000:5000 -d --name myfirstcontainer personal-python-test'
-		}
+      steps{
+		    sh 'docker run -p 5000:5000 -d --name tecamia-devops tecamia-devops-image:v1.0'
+		  }
     }
   }
 }
