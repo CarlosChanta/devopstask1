@@ -16,7 +16,7 @@ class TestHello(unittest.TestCase):
         self.assertEqual(rv.status, '200 OK')
 
     def hello_user(self):
-        usuario = 'John Doe'
+        usuario = "John"
         rv = self.app.get(f'/hello/{usuario}')
         self.assertEqual(rv.status, '200 OK')
         self.assertIn(bytearray(f"{usuario}", 'utf-8'), rv.data)

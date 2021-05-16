@@ -1,3 +1,4 @@
 .vscode/
 terraform/.terraform/*
 src/__pycache__/*
+jenkins/jenkins_data/*
