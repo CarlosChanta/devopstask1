@@ -19,9 +19,7 @@ pipeline {
     stage('test') {
 	    agent { docker { image 'python:3' } }
       steps {
-        sh 'virtualenv .venv'
-        sh 'source .venv/bin/activate'
-        sh 'pip install --user --no-cache-dir -r requirements.txt'
+        sh 'pip3 install --no-cache-dir -r requirements.txt --user '
         sh 'python3 ${WORKSPACE}/src/test.py'
       }
     }
