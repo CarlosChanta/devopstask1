@@ -34,7 +34,7 @@ pipeline {
 	
     stage('Docker Image build and tag') {
       steps{
-	      sh 'docker build -t cchanta/tecamia-devops:v1.0 -f ${WORKSPACE}/dockerfile'
+	      sh 'docker build -t cchanta/tecamia-devops:v1.0 .'
         sh 'docker push cchanta/tecamia-devops:v1.0'
 		  }
     }
