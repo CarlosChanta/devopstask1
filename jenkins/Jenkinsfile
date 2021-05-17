@@ -19,7 +19,7 @@ pipeline {
     stage('test') {
 	    agent { docker { image 'python:3' } }
       steps {
-        sh 'pip3 install --no-cache-dir -r requirements.txt --user '
+        sh 'pip install --no-cache-dir -r requirements.txt --user '
         sh 'python3 ${WORKSPACE}/src/test.py'
       }
     }
