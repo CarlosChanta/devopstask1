@@ -15,30 +15,27 @@ pipeline {
 		  }
 	    }
 	  }
-	  
-    stage('build') {
-	  agent { docker { image 'python:3' } }
-      steps {
-        sh 'pip install --no-cache-dir -r requirements.txt'
-      }
-    }
 	
     stage('test') {
 	    agent { docker { image 'python:3' } }
       steps {
-        sh 'sudo python3 ${WORKSPACE}/src/test.py'
+        sh 'python3 ${WORKSPACE}/src/test.py'
+      }
+    }
+
+    stage('Docker Login'){
+      environment {
+        DOCKER_CREDENTIALS = credentials('docker-repo-login')
+      }
+      steps{
+        sh 'docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}'
       }
     }
 	
-    stage('Docker Image') {
+    stage('Docker Image build and tag') {
       steps{
-	      sh 'docker build -t tecamia-devops-image:v1.0 .'
-		  }
-    }
-		
-    stage('Run Image / Container Creation') {
-      steps{
-		    sh 'docker run -p 5000:5000 -d --name tecamia-devops tecamia-devops-image:v1.0'
+	      sh 'docker build -t cchanta/tecamia-devops:v1.0 -f ${WORKSPACE}/dockerfile'
+        sh 'docker push cchanta/tecamia-devops:v1.0'
 		  }
     }
   }
