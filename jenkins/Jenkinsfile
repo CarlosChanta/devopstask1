@@ -19,14 +19,14 @@ pipeline {
     stage('build') {
 	  agent { docker { image 'python:3' } }
       steps {
-        sh 'pip install -r requirements.txt && python ${WORKSPACE}/src/test.py'
+        sh 'sudo pip install -r requirements.txt && python3 ${WORKSPACE}/src/test.py'
       }
     }
 	
     stage('test') {
 	    agent { docker { image 'python:3' } }
       steps {
-        sh 'python ${WORKSPACE}/src/test.py'
+        sh 'sudo python3 ${WORKSPACE}/src/test.py'
       }
     }
 	
