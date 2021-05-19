@@ -9,7 +9,7 @@ def homepage():
 
 @app.route('/greetings')
 def greetingsTask1():
-    return jsonify(Mensaje='Hello World from PC Name'+socket.gethostname())
+    return jsonify(Mensaje='Hello World from PC Name: '+socket.gethostname())
 
 @app.route('/hello/<username>')
 def hello_user(username):
