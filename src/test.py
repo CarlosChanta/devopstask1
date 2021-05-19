@@ -16,10 +16,9 @@ class TestHello(unittest.TestCase):
         self.assertEqual(rv.status, '200 OK')
 
     def hello_user(self):
-        usuario = "John"
-        rv = self.app.get(f'/hello/{usuario}')
+        rv = self.app.get(f'/hello/carlos')
         self.assertEqual(rv.status, '200 OK')
-        self.assertIn(bytearray(f"{usuario}", 'utf-8'), rv.data)
+        self.assertIn(bytearray(f"carlos", 'utf-8'), rv.data)
 
 if __name__ == '__main__':
     unittest.main()
