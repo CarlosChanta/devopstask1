@@ -1,12 +1,19 @@
-provider "google" {
-  credentials = "${file("serviceaccount.json")}"
-  project     = "true-server-269807"
-  region      = "southamerica-east1-a"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
 }
 
-resource "google_container_cluster" "gke-cluster" {
-  name               = "apigcp-cluster"
-  network            = "default"
-  location           = "southamerica-east1-a"
-  initial_node_count = 1
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_lightsail_instance" "api_flask_test" {
+  name              = "flask-from-mac"
+  availability_zone = "us-east-1b"
+  blueprint_id      = "cchanta/tecamia-devops:v1.0"
+  bundle_id         = "nano_2_0"
 }
